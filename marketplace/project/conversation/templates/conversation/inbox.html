@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Сообщения</h1>
+    <div class="row">
+        {% for conversation in conversations %}
+            <div class="col-12 mb-3">
+                <a href="{% url 'conversation:detail' conversation.id %}" class="text-decoration-none text-dark">
+                    <div class="card">
+                        <div class="row no-gutters">
+                            <div class="col-md-2">
+                                <img src="{{ conversation.item.image.url }}" class="card-img rounded-start" alt="{{ conversation.item.name }}">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    {% for member in conversation.members.all %}
+                                        {% if member != request.user %}
+                                            <h5 class="card-title">{{ member.username }}</h5>
+                                            <p class="card-text">{{ conversation.item.name }}</p>
+                                            <p class="card-text"><small class="text-muted">{{ conversation.modified_at }}</small></p>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

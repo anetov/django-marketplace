@@ -1,0 +1,56 @@
+<nav>
+    <div class="menu">
+        
+        <div class="menu-item">
+            <a href="{% url 'product:create_product' %}" class="menu-link">
+                <span class="menu-title btn btn-success text-white fs-4">Подать объявление</span>
+            </a>
+        </div>
+        
+        <div class="menu-item">
+            <a href="/" class="menu-link">
+                <span class="menu-title fs-4 text-white">Главная</span>
+            </a>
+        </div> 
+
+        <div class="menu-item">
+            <a href="{% url 'product:products' %}" class="menu-link">
+                <span class="menu-title fs-4 text-white">Поиск</span>
+            </a>
+        </div> 
+        
+        {% if request.user.is_authenticated %}
+
+            <div class="menu-item">
+                <a href="{% url 'conversation:inbox' %}" class="menu-link">
+                    <span class="menu-title fs-4 text-white">Сообщения</span>
+                </a>
+                <a href="{% url 'dashboard:index' %}" class="menu-link">
+                    <span class="menu-title fs-4 text-white">Объявления</span>
+                </a>
+            </div>
+
+
+            <div class="menu-item">
+                <a href="{% url 'core:logout' %}" class="menu-link">
+                    <span class="menu-title fs-4 text-white">Выйти</span>
+                </a>
+            </div>
+
+        {% else %}
+
+            <div class="menu-item" style="padding-right: 20px;">
+                <a href="{% url 'core:login' %}" class="menu-link">
+                    <span class="menu-title fs-4 text-white">Логин</span>
+                </a>
+            </div>
+
+            <div class="menu-item" style="padding-right: 20px;">
+                <a href="{% url 'core:signup' %}" class="menu-link">
+                    <span class="menu-title fs-4 text-white">Регистрация</span>
+                </a>
+            </div>
+
+        {% endif %}
+    </div>
+</nav>

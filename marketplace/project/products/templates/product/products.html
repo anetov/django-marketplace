@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="row bg-gray-100">
+    <div class="col-md-3">
+        <form method="get" action="{% url 'product:products' %}">
+            <input name="query" class="w-100 py-4 px-6 border rounded-2" type="text" value="{{ query }}" placeholder="Найти автомобиль, стул...">
+
+            <button class="mt-2 py-3 px-5 text-lg bg-success text-white rounded-xl">Найти</button>
+        </form>
+
+        <hr class="my-6">
+
+        <p class="fw-bold">Categories</p>
+
+        <ul class="list-unstyled">
+            {% for category in categories %}
+                <li class="py-2 px-2 rounded{% if category.id == category_id %} bg-light{% endif %}">
+                    <a href="{% url 'product:products' %}?query={{ query }}&category={{ category.id }}">{{ category.name_cat }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr class="my-3">
+
+        <p class="fw-bold">Очистить фильтр</p>
+
+        <ul class="list-unstyled">
+            <li>
+                <a href="{% url 'product:products' %}" class="btn btn-custom mt-2 py-3 px-4 rounded text-white">Clear</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'product:detail' product.id %}">
+                    <div>
+                        <img src="{{ product.image.url }}" class="rounded-3 w-100 h-auto bg-white" alt="">
+                    </div>
+
+                    <div class="p-6 bg-white rounded-bottom-xl">
+                        <h2 class="text-2xl">{{ product.name_prod }}</h2>  
+                        <p class="text-gray-500">Цена: {{ product.price }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %} 
+        </div>
+    </div>
+</div>
+
+{% endblock %}

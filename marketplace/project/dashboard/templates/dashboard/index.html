@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Объявления{% endblock %}
+
+{% block content %}
+
+    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-3">
+        <h2 class="mb-6 text-center">Мои товары</h2>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-3 mb-3">
+                    <a href="{% url 'product:detail' product.id %}">
+                        <div>
+                            <img src="{{ product.image.url }}" class="rounded-3 w-100 h-auto bg-white" alt="">
+                        </div>
+
+                        <div class="p-6 bg-white rounded-bottom-xl">
+                            <h2 class="text-2xl">{{ product.name_prod }}</h2>  
+                            <p class="text-gray-500">Цена: {{ product.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %} 
+        </div>
+    </div>
+{% endblock %}

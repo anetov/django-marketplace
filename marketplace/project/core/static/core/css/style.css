@@ -1,0 +1,21 @@
+.button-bg{
+    background-color: #198754;
+    margin-top: 30px;
+}
+
+.button-bg:hover{
+    background-color: #15633f;
+}
+
+.product-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-lg {
+    font-size: 1.125rem; /* или 18px */
+}
+
+.bg-teal-500 {
+    background-color: #38b2ac; /* Это приблизительный цвет для bg-teal-500 в Tailwind */
+}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div>
+    <div class="d-flex row justify-content-around">
+        <div class="col-5 p-2">
+            <img src="{{ product.image.url }}" class="rounded w-100 h-auto">
+        </div>
+    
+        <div class="col-6 p-6 bg-light rounded">
+            <h1 class="mb-6">{{ product.name_prod }}</h1>
+            <p class="text-gray"><strong>Цена: </strong>{{ product.price }}</p>
+            <p class="text-gray"><strong>Продавец: </strong>{{ product.created_by }}</p>
+
+            {% if product.description %}
+                <p class="text-gray">
+                    <strong>Описание: </strong><br>
+                    {{ product.description }}
+                </p>
+            {% endif %}
+
+            {% if request.user == product.created_by %}
+                <div class="mt-6 p-6 bg-white rounded-3">
+                    <p>Это ваш продукт!</p>
+
+                    <a href="{% url 'product:edit' product.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-success text-white rounded-3">Edit</a>
+                    <a href="{% url 'product:delete' product.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-danger text-white rounded-3">Delete</a>
+                </div>
+            {% else %}
+                <div class="mt-4">                
+                    <a href="{% url 'conversation:new' product.id %}" class="px-6 py-3 fw-bold text-white button-bg rounded">Написать продавцу</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Похожие объявления</h2>
+
+    <div class="row">
+        {% for product in related_products %}
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'product:detail' product.id %}">
+                    <div>
+                        <img src="{{ product.image.url }}" class="rounded-top-xl" alt="" style="width: 100%; height:220px">
+                    </div>
+
+                    <div class="p-6 bg-white rounded-bottom-xl">
+                        <h2 class="text-2xl">{{ product.name_prod  }}</h2>  
+                        <p class="text-gray-500">Цена: {{ product.price }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %} 
+    </div>
+</div>
+{% endblock %}

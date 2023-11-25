@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    {% include 'components/meta.html' %}
+    {% include 'components/css.html' %}
+    <style>
+        .product-img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        .bg-teal-500 {
+            background-color: #38b2ac;
+        }
+
+        .btn-custom {
+            background-color: #ffd700; /* Приблизительный цвет для bg-yellow-500 */
+        }
+    </style>
+</head>
+
+<body>
+    <header class="p-3 mb-2" style="background-color: #002F34;">
+        <div class="navbar-header">
+            <div class="container px-5">
+                <div class="d-flex justify-content-between">
+                    {% include 'components/logo.html' %}
+                    {% include 'components/menu.html' %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+        {% include 'components/footer.html' %}
+    </div>
+    {% include 'components/scripts.html' %}
+</body>
+
+</html>
